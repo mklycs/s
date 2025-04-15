@@ -21,9 +21,9 @@ cp /etc/sway/config ~/.config/sway/
 cp /etc/i3status.conf ~/.config/i3status/config
 
 # set custom keyboard layout, kitty as default teminal, screen resolution, suspend option and bar placement
-echo - e"input * {\n    xkb_layout de\n}\n" >> ~/.config/sway/config
 sed -i 's/^set \$term .*/set \$term kitty/' ~/.config/sway/config
 sed -i '/^output /d' ~/.config/sway/config
+echo -e "input * {\n    xkb_layout de\n}\n" >> ~/.config/sway/config
 echo -e "output * {\n    mode 1920x1080@144Hz\n}\n" >> ~/.config/sway/config
 
 # make keybindings for screenshotting and suspending system
