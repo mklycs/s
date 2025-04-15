@@ -7,7 +7,12 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y \
     sway swaylock wayland-utils xwayland \
     grim slurp wl-clipboard kitty \
-    vlc thunar pipewire i3status curl
+    vlc thunar i3status curl \
+    xdg-desktop-portal xdg-desktop-portal-wlr \
+    pipewire pipewire-audio-client-libraries
+
+systemctl --user start pipewire
+systemctl --user enable pipewire
 
 # install a web browser
 curl -fsS https://dl.brave.com/install.sh | sudo bash
@@ -58,7 +63,7 @@ order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
-    format_up = "W: connected"
+    format_up = "W: connected (%quality)"
     format_down = "W: not connected"
 }
 
