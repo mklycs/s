@@ -7,7 +7,7 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y \
     sway swaylock wayland-utils xwayland \
     grim slurp wl-clipboard kitty \
-    vlc nemo pipewire i3status curl
+    vlc thunar pipewire i3status curl
 
 # install a web browser
 curl -fsS https://dl.brave.com/install.sh | sudo bash
