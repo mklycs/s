@@ -7,9 +7,9 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y \
     sway swaylock wayland-utils xwayland \
     grim slurp wl-clipboard kitty \
-    vlc vim nnn feh i3status curl \
+    vlc thunar eog i3status curl \
     xdg-desktop-portal xdg-desktop-portal-wlr \
-    pipewire pipewire-audio-client-libraries
+    pipewire pipewire-audio-client-libraries \
 
 systemctl --user start pipewire
 systemctl --user enable pipewire
@@ -25,7 +25,7 @@ mkdir -p ~/.config/i3status
 cp /etc/sway/config ~/.config/sway/
 cp /etc/i3status.conf ~/.config/i3status/config
 
-# set custom keyboard layout, kitty as default teminal, screen resolution, suspend option and bar placement
+# set custom keyboard layout, kitty as default terminal, screen resolution and bar placement
 sed -i 's/^set \$term .*/set \$term kitty/' ~/.config/sway/config
 sed -i '/^output /d' ~/.config/sway/config
 echo -e "input * {\n    xkb_layout de\n}\n" >> ~/.config/sway/config
@@ -108,32 +108,6 @@ xterm*|rxvt*)
 esac
 # <<< end custom prompt >>>
 EOF
-
-# open files from nnn with vim or feh image viewer
-cat << 'EOF' >> ~/.config/nnn-opener.sh
-#!/bin/sh
-case "$1" in
-  *.jpg|*.jpeg|*.png|*.gif|*.webp)
-    feh "$@" ;;
-  *.c|*.cpp|*.py|*.sh|*.rs|*.html|*.css|*.js|*.ts|*.java|*.lua|*.txt|*.md)
-    kitty -e vim "$@" ;;
-  *)
-    xdg-open "$@" ;;
-esac
-EOF
-
-# make nnn-opener.sh executable
-chmod +x ~/.config/nnn-opener.sh
-
-# adjust .bashrc to export nnn-opener.sh
-cat << 'EOF' >> ~/.bashrc
-
-export NNN_USE_OPEN=1
-export NNN_OPENER="$HOME/.config/nnn-opener.sh"
-EOF
-
-# reload .bashrc
-source ~/.bashrc 
 
 # set sway autostart
 echo '[[ "$(tty)" == "/dev/tty1" ]] && exec sway' >> ~/.bash_profile
