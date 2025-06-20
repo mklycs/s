@@ -92,6 +92,7 @@ output * {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym ctrl+alt+t exec $term
 
     # Kill focused window
     bindsym $mod+Shift+q kill

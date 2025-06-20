@@ -11,7 +11,7 @@ chmod +x ./scripts/make-scripts-executable.sh
 ./scripts/configure-powermenu.sh
 ./scripts/configure-sway.sh
 ./scripts/adjust-i3status.sh
-./scripts/adjust-bash.sh
+# ./scripts/adjust-bash.sh
 ./scripts/adjust-profile.sh
 ./scripts/adjust-terminal.sh
 ./scripts/remove-packages.sh
