@@ -2,7 +2,7 @@
 
 set -e
 
-cat <<EOF > ~/.local/bin/powermenu
+cat <<'EOF' > ~/.local/bin/powermenu
 #!/bin/bash
 
 CHOICE=$(printf "Power Off \nReboot \nSuspend \nLock \nLogout" | GTK_THEME=Adwaita-dark wofi --dmenu --insensitive)
