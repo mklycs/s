@@ -11,7 +11,7 @@ case "$CHOICE" in
     *Power*) systemctl poweroff ;;
     *Reboot*) systemctl reboot ;;
     *Suspend*) systemctl suspend && swaylock -c 000000 ;;
-    *Lock*) swaylock ;;
+    *Lock*) swaylock -c 000000 ;;
     *Logout*) swaymsg exit ;;
 esac
 

@@ -8,7 +8,6 @@ sudo apt install -y \
     sway swaylock wayland-utils xwayland \
     grim slurp wl-clipboard kitty wofi \
     vlc thunar eog i3status curl \
-    xdg-desktop-portal xdg-desktop-portal-wlr \
     pipewire pipewire-audio-client-libraries \
     gvfs-backends gvfs-fuse mtp-tools jmtpfs thunar-volman \
     gnome-themes-extra \
