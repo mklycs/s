@@ -9,15 +9,7 @@ mkdir -p ~/.config/i3status
 # this will write an adjusted sway-config file to: ~/.config/sway/config
 # custom parts are marked with ##### TITLE #####
 cat <<'EOF' > ~/.config/sway/config
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -27,64 +19,23 @@ set $right l
 # Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-
-##### SET WOFI AS DEFAULT MENU #####
 set $menu ~/.local/bin/wofi-launcher
-####################################
 
 include /etc/sway/config-vars.d/*
 
-##### SET KEYBOARD LAYOUT TO GERMAN #####
+### Input configuration
 input * {
     xkb_layout de
+    tap enabled
+    tap_button_map lrm
+    natural_scroll enabled
 }
-#########################################
-
-##### SET PREFERRED SCREEN RESOLUTION #####
-output * {
-    mode 1920x1080@144Hz
-}
-###########################################
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+output eDP-1 mode 1920x1080@60Hz
+output HDMI-A-1 mode 1920x1080@60Hz
+output eDP-1 position 0 0
+output HDMI-A-1 position 0 -1080
 
 ### Key bindings
 #
@@ -100,20 +51,20 @@ output * {
     # Start your launcher
     bindsym $mod+d exec $menu
 
-    ##### CUSTOM KEYBINDINGS ######
+    ### Custom keybindings
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
-    # bindsym $mod+Shift+z exec systemctl suspend && swaylock -c 000000
-    bindsym $mod+Pause exec ~/.local/bin/powermenu
+    bindsym $mod+Shift+P exec ~/.local/bin/powermenu
     bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
     bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-    ###############################
+    bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
+    # Change normal to inverse to use left mouse button for resizing 
+    # and right mouse button for dragging.
     floating_modifier $mod normal
 
     # Reload the configuration file
@@ -237,16 +188,13 @@ bindsym $mod+r mode "resize"
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position bottom
     status_command i3status
 }
 
-##### REMOVE TITLEBAR #####
 default_border pixel 2
 default_floating_border normal
-###########################
 
 EOF
 
